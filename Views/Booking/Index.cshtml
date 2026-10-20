@@ -1,0 +1,92 @@
+@model IEnumerable<webProgramming.Models.Booking>
+@{ ViewBag.Title = "My Bookings"; }
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>My Booking History</h2>
+    <a href="@Url.Action("Index", "Facility")" class="btn btn-primary">Book a Facility</a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        You don't have any bookings yet. <a href="@Url.Action("Index", "Facility")" class="alert-link">Browse facilities</a> to make your first reservation!
+    </div>
+}
+else
+{
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Facility</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Status</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <strong>@item.Facility.Name</strong><br />
+                                    <small class="text-muted">@item.Facility.Type</small>
+                                </td>
+                                <td>@item.StartTime.ToString("MMM dd, yyyy HH:mm")</td>
+                                <td>@item.EndTime.ToString("MMM dd, yyyy HH:mm")</td>
+                                <td>
+                                    @if (item.Status == "Reserved")
+                                    {
+                                        <span class="badge bg-primary">Reserved</span>
+                                    }
+                                    else if (item.Status == "Checked-In")
+                                    {
+                                        <span class="badge bg-success">Checked-In</span>
+                                    }
+                                    else if (item.Status == "Checked-Out")
+                                    {
+                                        <span class="badge bg-secondary">Checked-Out</span>
+                                    }
+                                    else if (item.Status == "Cancelled")
+                                    {
+                                        <span class="badge bg-danger">Cancelled</span>
+                                    }
+                                </td>
+                                <td class="text-end">
+                                    @if (item.Status == "Reserved")
+                                    {
+                                        using (Html.BeginForm("CheckIn", "Booking", new { id = item.Id }, FormMethod.Post, new { @class = "d-inline" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-sm btn-success me-1">Check-In</button>
+                                        }
+                                        using (Html.BeginForm("Cancel", "Booking", new { id = item.Id }, FormMethod.Post, new { @class = "d-inline" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Cancel this reservation?');">Cancel</button>
+                                        }
+                                    }
+                                    else if (item.Status == "Checked-In")
+                                    {
+                                        using (Html.BeginForm("CheckOut", "Booking", new { id = item.Id }, FormMethod.Post, new { @class = "d-inline" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-sm btn-warning">Check-Out</button>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">No actions available</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

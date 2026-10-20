@@ -1,0 +1,56 @@
+@{ ViewBag.Title = "Admin Dashboard"; }
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Admin Dashboard</h2>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3 shadow-sm border-0">
+            <div class="card-body text-center p-4">
+                <h5 class="card-title text-uppercase mb-3">Total Facilities</h5>
+                <h1 class="display-4 fw-bold mb-0">@ViewBag.TotalFacilities</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3 shadow-sm border-0">
+            <div class="card-body text-center p-4">
+                <h5 class="card-title text-uppercase mb-3">Active Bookings</h5>
+                <h1 class="display-4 fw-bold mb-0">@ViewBag.ActiveBookings</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-dark bg-info mb-3 shadow-sm border-0">
+            <div class="card-body text-center p-4">
+                <h5 class="card-title text-uppercase mb-3">Registered Users</h5>
+                <h1 class="display-4 fw-bold mb-0">@ViewBag.TotalUsers</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-white font-weight-bold pt-3 pb-3">
+        <h5 class="mb-0">Quick Actions</h5>
+    </div>
+    <div class="card-body">
+        <div class="d-flex flex-wrap gap-2">
+            <a href="@Url.Action("Create", "Facility")" class="btn btn-outline-primary">
+                + Add New Facility
+            </a>
+            <a href="@Url.Action("Index", "Facility")" class="btn btn-outline-secondary">
+                Manage Facilities
+            </a>
+            <a href="@Url.Action("ManageUsers", "Admin")" class="btn btn-outline-dark">
+                View User List
+            </a>
+            <a href="@Url.Action("SendNotification", "Admin")" class="btn btn-outline-success">
+                Send Notification
+            </a>
+        </div>
+    </div>
+</div>

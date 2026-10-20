@@ -1,0 +1,10 @@
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Welcome to Your New Office</h2>
+<p>Whether you need a hot desk for the day, a dedicated desk for the month, or a private office for your team, we have the perfect space for you. Join our vibrant community of professionals, freelancers, and startups.</p>
+
+<!-- Tesisler sayfasına dinamik buton (FacilityController Index metoduna gider) -->
+<a href="@Url.Action("Index", "Facility")" class="btn">View Facilities</a>

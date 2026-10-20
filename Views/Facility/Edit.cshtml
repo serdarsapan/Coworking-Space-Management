@@ -1,0 +1,39 @@
+@model webProgramming.Models.Facility
+@{ ViewBag.Title = "Edit Facility"; }
+
+<div class="card shadow-sm mt-4" style="max-width: 600px;">
+    <div class="card-header bg-warning text-dark">
+        <h4 class="mb-0">Edit Facility: @Model.Name</h4>
+    </div>
+    <div class="card-body p-4">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Name, new { @class = "form-label fw-bold" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Type, new { @class = "form-label fw-bold" })
+                @Html.DropDownListFor(m => m.Type, new SelectList(new[] { "Office", "Meeting-Room", "Desk" }, Model.Type), new { @class = "form-select" })
+                @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Capacity, new { @class = "form-label fw-bold" })
+                @Html.TextBoxFor(m => m.Capacity, new { @class = "form-control", type = "number" })
+                @Html.ValidationMessageFor(m => m.Capacity, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a href="@Url.Action("Index")" class="btn btn-outline-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Update Facility</button>
+            </div>
+        }
+    </div>
+</div>

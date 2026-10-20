@@ -1,0 +1,68 @@
+@model IEnumerable<webProgramming.Models.Facility>
+@{ ViewBag.Title = "Available Facilities"; }
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Available Facilities</h2>
+    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <a href="@Url.Action("Create")" class="btn btn-success">+ Add New Facility</a>
+    }
+</div>
+
+<!-- Dynamic Search Bar -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search by name or type (e.g., Desk, Office)..." onkeyup="filterFacilities()">
+    </div>
+</div>
+
+<div class="row" id="facilityGrid">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4 facility-card">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-header bg-white border-bottom-0 pt-3">
+                    <span class="badge bg-secondary float-end facility-type">@item.Type</span>
+                    <h5 class="card-title mb-0 facility-name">@item.Name</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-muted mb-3">Capacity: <strong>@item.Capacity people</strong></p>
+                    
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("Create", "Booking", new { id = item.Id })" class="btn btn-primary">Book Now</a>
+                        <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-outline-secondary btn-sm">Details</a>
+                    </div>
+                </div>
+                
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <div class="card-footer bg-white border-top-0 pb-3">
+                        <div class="btn-group w-100">
+                            <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Dynamic JavaScript Filter -->
+<script>
+    function filterFacilities() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let cards = document.getElementsByClassName('facility-card');
+
+        for (let i = 0; i < cards.length; i++) {
+            let name = cards[i].querySelector('.facility-name').innerText.toLowerCase();
+            let type = cards[i].querySelector('.facility-type').innerText.toLowerCase();
+
+            if (name.includes(input) || type.includes(input)) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+</script>

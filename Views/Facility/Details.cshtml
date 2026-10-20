@@ -1,0 +1,21 @@
+@model webProgramming.Models.Facility
+@{ ViewBag.Title = "Facility Details"; }
+
+<div class="card shadow-sm mt-4" style="max-width: 600px;">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">@Model.Name</h4>
+    </div>
+    <div class="card-body p-4">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Facility Type:</dt>
+            <dd class="col-sm-8"><span class="badge bg-info text-dark">@Model.Type</span></dd>
+
+            <dt class="col-sm-4">Capacity:</dt>
+            <dd class="col-sm-8">@Model.Capacity Persons</dd>
+        </dl>
+    </div>
+    <div class="card-footer bg-white d-flex justify-content-between p-3">
+        <a href="@Url.Action("Index")" class="btn btn-outline-secondary">Back to List</a>
+        <a href="@Url.Action("Create", "Booking", new { id = Model.Id })" class="btn btn-primary">Book This Facility</a>
+    </div>
+</div>

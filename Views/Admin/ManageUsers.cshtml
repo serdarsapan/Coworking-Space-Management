@@ -1,0 +1,49 @@
+@model IEnumerable<webProgramming.Models.ApplicationUser>
+@{ ViewBag.Title = "Manage Users"; }
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Registered Users</h2>
+    <a href="@Url.Action("Dashboard", "Admin")" class="btn btn-outline-secondary">Back to Dashboard</a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+    <thead class="table-dark">
+        <tr>
+            <th>Email / Username</th>
+            <th>System User ID</th>
+            <th class="text-end">İşlemler</th> <!-- YENİ SÜTUN BAŞLIĞI -->
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="3" class="text-center text-muted p-4">No users found.</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var user in Model)
+            {
+                <tr>
+                    <td><strong>@user.UserName</strong></td> <!-- UserName olarak güncelledik -->
+                    <td><small class="text-muted">@user.Id</small></td>
+                    <td class="text-end">
+                        <!-- YENİ SİLME BUTONU -->
+                        @using (Html.BeginForm("DeleteUser", "Admin", new { id = user.Id }, FormMethod.Post, new { @class = "d-inline" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bu kullanıcıyı ve tüm rezervasyonlarını silmek istediğinize emin misiniz?');">Sil</button>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+        </div>
+    </div>
+</div>

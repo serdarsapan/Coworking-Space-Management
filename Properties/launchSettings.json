@@ -1,0 +1,12 @@
+﻿{
+  "profiles": {
+    "Start Web": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files (x86)\\IIS Express\\iisexpress.exe",
+      "commandLineArgs": "/path:\"C:\\Users\\Admin\\Desktop\\webProgramming\" /port:5112",
+      "workingDirectory": "C:\\Users\\Admin\\Desktop\\webProgramming",
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5112"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background: #2c3e50;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+/* Navbar arkaplanı */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background: #34495e !important;
+    padding: 10px;
+}
+
+    /* Görünmezlik Sorununu Çözen Asıl Kısım */
+    nav a, .nav-link, .navbar-brand {
+        color: rgb(0,0,0) !important ;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 5px 15px;
+        border-radius: 4px;
+        transition: color 0.3s, background 0.3s;
+    }
+
+        /* Üzerine gelince hover efekti */
+        nav a:hover, .nav-link:hover, .navbar-brand:hover {
+            background: #1abc9c;
+            color: #ffffff !important;
+        }
+
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #1abc9c;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+    .btn:hover {
+        background: #16a085;
+        color: white !important;
+    }
+
+/* Contact Form Styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input, .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+.error-msg {
+    color: #e74c3c;
+    font-size: 0.9em;
+    display: none;
+    margin-top: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    background: #2c3e50;
+    color: white;
+    font-size: 0.9em;
+}

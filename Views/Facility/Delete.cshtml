@@ -1,0 +1,22 @@
+@model webProgramming.Models.Facility
+@{ ViewBag.Title = "Delete Facility"; }
+
+<div class="card border-danger shadow-sm mt-4" style="max-width: 500px;">
+    <div class="card-header bg-danger text-white">
+        <h4 class="mb-0">Confirm Deletion</h4>
+    </div>
+    <div class="card-body text-center p-4">
+        <h5 class="text-danger mb-3">Are you sure you want to delete this facility?</h5>
+        <p class="text-muted mb-4"><strong>@Model.Name</strong> (@Model.Type)</p>
+
+        @using (Html.BeginForm("Delete", "Facility", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            <div class="d-flex justify-content-center gap-3">
+                <a href="@Url.Action("Index")" class="btn btn-outline-secondary">Cancel</a>
+                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            </div>
+        }
+    </div>
+</div>
